@@ -1,0 +1,428 @@
+/* 全局重置 + 基础配置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", "微软雅黑", sans-serif;
+    /* 平滑过渡所有动画 */
+    transition: all 0.3s ease;
+}
+
+/* 自定义变量（方便统一修改配色） */
+:root {
+    --primary-color: #4361ee; /* 主色调（蓝紫色） */
+    --secondary-color: #ff6b6b; /* 辅助色（珊瑚红） */
+    --text-dark: #2b2d42; /* 深色文字 */
+    --text-light: #8d99ae; /* 浅色文字 */
+    --bg-light: #f8f9fa; /* 浅色背景 */
+    --white: #ffffff; /* 白色 */
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* 通用阴影 */
+    --radius: 12px; /* 通用圆角 */
+}
+
+/* 容器（居中+限制宽度） */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 导航栏（美化） */
+.navbar {
+    background-color: var(--white);
+    padding: 18px 0;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: var(--primary-color);
+    font-size: 26px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 35px;
+}
+
+.nav-link {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+}
+
+/* 导航链接hover下划线动画 */
+.nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+/* 首页横幅（渐变色背景+动画） */
+.banner {
+    /* 渐变色背景 */
+    background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+    padding: 120px 0;
+    text-align: center;
+    color: var(--white);
+    /* 轻微的背景动效 */
+    background-size: 200% 200%;
+    animation: gradientMove 8s ease infinite;
+}
+
+/* 背景渐变动画 */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.banner-content {
+    /* 元素入场动画 */
+    animation: fadeUp 1s ease;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.banner-title {
+    font-size: 48px;
+    margin-bottom: 25px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.banner-desc {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 主按钮（美化+波纹效果） */
+.btn-primary {
+    padding: 14px 36px;
+    background-color: var(--white);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 600;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 按钮hover效果 */
+.btn-primary:hover {
+    background-color: #f0f4ff;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* 按钮波纹效果（配合JS） */
+.btn-primary::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.btn-primary:active::after {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+}
+
+/* 特色板块（新增） */
+.features {
+    padding: 100px 0;
+    background-color: var(--bg-light);
+}
+
+.section-title {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 60px;
+    color: var(--text-dark);
+    font-weight: 700;
+    position: relative;
+}
+
+/* 标题下方装饰线 */
+.section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 2px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background-color: var(--white);
+    padding: 40px 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+/* 卡片hover效果 */
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+.feature-icon {
+    font-size: 48px;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+}
+
+.feature-card h3 {
+    font-size: 22px;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    font-size: 16px;
+    color: var(--text-light);
+    line-height: 1.8;
+}
+
+/* 联系方式板块（美化） */
+.contact {
+    padding: 100px 0;
+    background-color: var(--white);
+}
+
+.contact-card {
+    background-color: var(--bg-light);
+    padding: 50px 40px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 18px;
+    color: var(--text-dark);
+    margin-bottom: 25px;
+}
+
+.contact-item:last-child {
+    margin-bottom: 0;
+}
+
+.contact-icon {
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.contact-item a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.contact-item a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+/* 关于我页面（美化） */
+.about {
+    padding: 100px 0;
+    background-color: var(--bg-light);
+}
+
+.about-card {
+    background-color: var(--white);
+    padding: 50px 40px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.avatar {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 8px solid rgba(67, 97, 238, 0.1);
+    /* 头像hover旋转效果 */
+    transition: transform 0.5s ease;
+}
+
+.avatar:hover {
+    transform: rotate(5deg) scale(1.05);
+}
+
+.about-content {
+    max-width: 600px;
+}
+
+.about-content h3 {
+    font-size: 26px;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.about-content p {
+    font-size: 17px;
+    color: var(--text-light);
+    line-height: 1.9;
+    margin-bottom: 25px;
+}
+
+.hobbies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.hobby-tag {
+    padding: 8px 20px;
+    background-color: rgba(67, 97, 238, 0.1);
+    color: var(--primary-color);
+    border-radius: 50px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 页脚（美化） */
+.footer {
+    background-color: var(--text-dark);
+    color: var(--white);
+    padding: 40px 0;
+    margin-top: 0;
+}
+
+.footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer p {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+}
+
+.social-links a {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 18px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-5px);
+}
+
+/* 响应式适配手机 */
+@media (max-width: 768px) {
+    .banner-title {
+        font-size: 36px;
+    }
+    .nav-links {
+        gap: 20px;
+    }
+    .about-card {
+        text-align: center;
+        padding: 30px 20px;
+    }
+    .footer .container {
+        justify-content: center;
+        text-align: center;
+    }
+    .section-title {
+        font-size: 30px;
+    }
+}
